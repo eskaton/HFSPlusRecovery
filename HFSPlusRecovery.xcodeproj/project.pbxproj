@@ -1,0 +1,251 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F870486A9BA00D96B5E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
+		8DD76F890486A9BA00D96B5E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097DBE83FE8419DDC02AAC07 /* CoreServices.framework */; };
+		967DC3D80E5DE9B300FB2076 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3C90E5DE9B300FB2076 /* io.c */; };
+		967DC3D90E5DE9B300FB2076 /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3CB0E5DE9B300FB2076 /* btree.c */; };
+		967DC3DA0E5DE9B300FB2076 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3CD0E5DE9B300FB2076 /* util.c */; };
+		967DC3DB0E5DE9B300FB2076 /* rec_handler.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3CE0E5DE9B300FB2076 /* rec_handler.c */; };
+		967DC3DC0E5DE9B300FB2076 /* byteorder.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3CF0E5DE9B300FB2076 /* byteorder.c */; };
+		967DC3DE0E5DE9B300FB2076 /* rec_filter.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3D30E5DE9B300FB2076 /* rec_filter.c */; };
+		967DC3DF0E5DE9B300FB2076 /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3D50E5DE9B300FB2076 /* dump.c */; };
+		968324EE0E6C81FE00F009F9 /* orderedlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 968324ED0E6C81FE00F009F9 /* orderedlist.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F8B0486A9BA00D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		097DBE83FE8419DDC02AAC07 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		8DD76F8E0486A9BA00D96B5E /* HFSPlusRecovery */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HFSPlusRecovery; sourceTree = BUILT_PRODUCTS_DIR; };
+		967DC3C80E5DE9B300FB2076 /* rec_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rec_filter.h; sourceTree = "<group>"; };
+		967DC3C90E5DE9B300FB2076 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		967DC3CB0E5DE9B300FB2076 /* btree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = btree.c; sourceTree = "<group>"; };
+		967DC3CC0E5DE9B300FB2076 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		967DC3CD0E5DE9B300FB2076 /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		967DC3CE0E5DE9B300FB2076 /* rec_handler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rec_handler.c; sourceTree = "<group>"; };
+		967DC3CF0E5DE9B300FB2076 /* byteorder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = byteorder.c; sourceTree = "<group>"; };
+		967DC3D00E5DE9B300FB2076 /* rec_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rec_handler.h; sourceTree = "<group>"; };
+		967DC3D20E5DE9B300FB2076 /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
+		967DC3D30E5DE9B300FB2076 /* rec_filter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rec_filter.c; sourceTree = "<group>"; };
+		967DC3D40E5DE9B300FB2076 /* btree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btree.h; sourceTree = "<group>"; };
+		967DC3D50E5DE9B300FB2076 /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dump.c; sourceTree = "<group>"; };
+		967DC3D60E5DE9B300FB2076 /* dump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dump.h; sourceTree = "<group>"; };
+		967DC3D70E5DE9B300FB2076 /* byteorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = byteorder.h; sourceTree = "<group>"; };
+		968324EC0E6C81FE00F009F9 /* orderedlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderedlist.h; sourceTree = "<group>"; };
+		968324ED0E6C81FE00F009F9 /* orderedlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = orderedlist.c; sourceTree = "<group>"; };
+		968325C60E6F038E00F009F9 /* definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = definitions.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F880486A9BA00D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F890486A9BA00D96B5E /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* HFSPlusRecovery */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				1A8B4A8EFE9D542A11CA2CBB /* Products */,
+			);
+			name = HFSPlusRecovery;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7796FE84155DC02AAC07 /* main.c */,
+				968325C60E6F038E00F009F9 /* definitions.h */,
+				967DC3C80E5DE9B300FB2076 /* rec_filter.h */,
+				967DC3D30E5DE9B300FB2076 /* rec_filter.c */,
+				967DC3D20E5DE9B300FB2076 /* io.h */,
+				967DC3C90E5DE9B300FB2076 /* io.c */,
+				967DC3D40E5DE9B300FB2076 /* btree.h */,
+				967DC3CB0E5DE9B300FB2076 /* btree.c */,
+				967DC3CC0E5DE9B300FB2076 /* util.h */,
+				967DC3CD0E5DE9B300FB2076 /* util.c */,
+				967DC3D00E5DE9B300FB2076 /* rec_handler.h */,
+				967DC3CE0E5DE9B300FB2076 /* rec_handler.c */,
+				967DC3D70E5DE9B300FB2076 /* byteorder.h */,
+				967DC3CF0E5DE9B300FB2076 /* byteorder.c */,
+				967DC3D60E5DE9B300FB2076 /* dump.h */,
+				967DC3D50E5DE9B300FB2076 /* dump.c */,
+				968324EC0E6C81FE00F009F9 /* orderedlist.h */,
+				968324ED0E6C81FE00F009F9 /* orderedlist.c */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				097DBE83FE8419DDC02AAC07 /* CoreServices.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		1A8B4A8EFE9D542A11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F8E0486A9BA00D96B5E /* HFSPlusRecovery */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F840486A9BA00D96B5E /* HFSPlusRecovery */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB925E08733DCF0010E9CD /* Build configuration list for PBXNativeTarget "HFSPlusRecovery" */;
+			buildPhases = (
+				8DD76F860486A9BA00D96B5E /* Sources */,
+				8DD76F880486A9BA00D96B5E /* Frameworks */,
+				8DD76F8B0486A9BA00D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HFSPlusRecovery;
+			productInstallPath = "$(HOME)/bin";
+			productName = HFSPlusRecovery;
+			productReference = 8DD76F8E0486A9BA00D96B5E /* HFSPlusRecovery */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB926208733DCF0010E9CD /* Build configuration list for PBXProject "HFSPlusRecovery" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* HFSPlusRecovery */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F840486A9BA00D96B5E /* HFSPlusRecovery */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F860486A9BA00D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F870486A9BA00D96B5E /* main.c in Sources */,
+				967DC3D80E5DE9B300FB2076 /* io.c in Sources */,
+				967DC3D90E5DE9B300FB2076 /* btree.c in Sources */,
+				967DC3DA0E5DE9B300FB2076 /* util.c in Sources */,
+				967DC3DB0E5DE9B300FB2076 /* rec_handler.c in Sources */,
+				967DC3DC0E5DE9B300FB2076 /* byteorder.c in Sources */,
+				967DC3DE0E5DE9B300FB2076 /* rec_filter.c in Sources */,
+				967DC3DF0E5DE9B300FB2076 /* dump.c in Sources */,
+				968324EE0E6C81FE00F009F9 /* orderedlist.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB925F08733DCF0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = HFSPlusRecovery;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB926008733DCF0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = HFSPlusRecovery;
+			};
+			name = Release;
+		};
+		1DEB926308733DCF0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB926408733DCF0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB925E08733DCF0010E9CD /* Build configuration list for PBXNativeTarget "HFSPlusRecovery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB925F08733DCF0010E9CD /* Debug */,
+				1DEB926008733DCF0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB926208733DCF0010E9CD /* Build configuration list for PBXProject "HFSPlusRecovery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB926308733DCF0010E9CD /* Debug */,
+				1DEB926408733DCF0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
