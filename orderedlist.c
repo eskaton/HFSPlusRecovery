@@ -97,9 +97,9 @@ ol_delete_node(orderedlist *list, ol_node *node, void *key) {
 
 void 
 ol_delete(orderedlist *list, void *key) {
-	if (list->head == NULL) {
-		return;
-	} else if (list->keyComparator(key, list->head->key) == 0) {
+   if (list->head == NULL) {
+      return;
+   } else if (list->keyComparator(key, list->head->key) == 0) {
         ol_node *node = list->head;
         list->head = list->head->next;
         ol_destroy_node(node);
@@ -112,26 +112,26 @@ ol_delete(orderedlist *list, void *key) {
 
 ol_node* 
 ol_find_node(orderedlist *list, ol_node *node, void *key) {
-	int cmp;
+   int cmp;
     
-	if (node == NULL) {
-		return NULL;
-	}
+   if (node == NULL) {
+      return NULL;
+   }
     
-	cmp = list->keyComparator(node->key, key);
+   cmp = list->keyComparator(node->key, key);
     
-	if (cmp < 0) {
-		return ol_find_node(list, node->next, key);
-	} else if( cmp == 0 ) {
-		return node;
-	} else {
-		return NULL;
-	}
+   if (cmp < 0) {
+      return ol_find_node(list, node->next, key);
+   } else if( cmp == 0 ) {
+      return node;
+   } else {
+      return NULL;
+   }
 }
 
 ol_node *
 ol_find(orderedlist *list, void *key) {
-	return ol_find_node(list, list->head, key);
+   return ol_find_node(list, list->head, key);
 }
 
 

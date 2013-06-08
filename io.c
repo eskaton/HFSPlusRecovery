@@ -44,7 +44,7 @@ openVolume(const char *const dev, u_int64_t volOffset) {
    volume.volOffset = volOffset;
    
    readVolumeHeader();
-	
+   
    if (volume.volHeader.signature != kHFSPlusSigWord 
          || volume.volHeader.version != kHFSPlusVersion) {
       fprintf(stderr, "invalid volume header");
@@ -168,10 +168,10 @@ copyFile(const file *const f, const char *const dstFileName) {
    for (e = 0; e < 8; e++) {
       dataBlocks += hfsFile->dataFork.extents[e].blockCount;
       rsrcBlocks += hfsFile->resourceFork.extents[e].blockCount;
-		if (dataBlocks == hfsFile->dataFork.totalBlocks 
+      if (dataBlocks == hfsFile->dataFork.totalBlocks 
             && rsrcBlocks == hfsFile->resourceFork.totalBlocks) {
-			break;
-		}
+         break;
+      }
    }
    
    if (dataBlocks != hfsFile->dataFork.totalBlocks && f->dataExtents == NULL 
@@ -181,8 +181,8 @@ copyFile(const file *const f, const char *const dstFileName) {
       return;
    }
    
-	printf("restoring file: %d - %s\n", f->fileID, dstFileName);
-	
+   printf("restoring file: %d - %s\n", f->fileID, dstFileName);
+   
    /* open the file in any case. either there is a data fork
     * or an empty file must be present to write its resource fork
     */
@@ -194,10 +194,10 @@ copyFile(const file *const f, const char *const dstFileName) {
    
    if (hfsFile->dataFork.totalBlocks > 0) {
       if (copyFork(&hfsFile->dataFork, f->dataExtents, dstData) == -1) {
-			fprintf(stderr, "failed to restore: %s\n", dstFileName);
-			fclose(dstData);
-			return;
-		}
+         fprintf(stderr, "failed to restore: %s\n", dstFileName);
+         fclose(dstData);
+         return;
+      }
    }
    
    fclose(dstData);
@@ -216,19 +216,19 @@ copyFile(const file *const f, const char *const dstFileName) {
       }
 
       if (copyFork(&hfsFile->resourceFork, f->rsrcExtents, dstRsrc) == -1) {
-			fprintf(stderr, "failed to restore: %s\n", dstFileName);
-			fclose(dstRsrc);
-			free(rsrcFileName);
-			return;
-		}
-		
+         fprintf(stderr, "failed to restore: %s\n", dstFileName);
+         fclose(dstRsrc);
+         free(rsrcFileName);
+         return;
+      }
+      
       fclose(dstRsrc);
       free(rsrcFileName);
    }
    
    setFinderInfo(dstFileName, hfsFile);
-	HFSPlusBSDInfo bsdInfo = hfsFile->bsdInfo;
-	chmod(dstFileName, bsdInfo.fileMode);
+   HFSPlusBSDInfo bsdInfo = hfsFile->bsdInfo;
+   chmod(dstFileName, bsdInfo.fileMode);
 }
 
 int 
@@ -241,21 +241,21 @@ copyExtent(char *const buf, const HFSPlusExtentDescriptor *const desc,
       
    while (count-- > 0) {
       if (fsetpos(volume.device, (fpos_t*)&offset) == -1) {
-			fprintf(stderr, "%s:%d unable to seek for file\n", __FILE__, __LINE__);
+         fprintf(stderr, "%s:%d unable to seek for file\n", __FILE__, __LINE__);
          return -1;
       }
          
       if (fread(buf, blockSize, 1, volume.device) != 1) {
-			fprintf(stderr, "%s:%d unable to read file\n", __FILE__, __LINE__);
-			int err = ferror(volume.device);
+         fprintf(stderr, "%s:%d unable to read file\n", __FILE__, __LINE__);
+         int err = ferror(volume.device);
 
-			if (err) {
-				fprintf(stderr, "%s:%d error=%d\n", __FILE__, __LINE__, err);
-				clearerr(volume.device);
-			} else if (feof(volume.device)) {
-				fprintf(stderr, "%s:%d premature end-of-file\n", __FILE__, 
+         if (err) {
+            fprintf(stderr, "%s:%d error=%d\n", __FILE__, __LINE__, err);
+            clearerr(volume.device);
+         } else if (feof(volume.device)) {
+            fprintf(stderr, "%s:%d premature end-of-file\n", __FILE__, 
                   __LINE__);
-			}
+         }
 
          return -1;
       }
@@ -264,8 +264,8 @@ copyExtent(char *const buf, const HFSPlusExtentDescriptor *const desc,
       block++;
       offset += blockSize;
    }
-	
-	return 0;
+   
+   return 0;
 }
 
 int 
@@ -273,7 +273,7 @@ copyFork(const HFSPlusForkData *const fork, const orderedlist *extList,
       FILE *const dst) {
    u_int32_t blockSize = volume.volHeader.blockSize;
    u_int64_t partialBlockSize = fork->logicalSize % blockSize;
-	u_int32_t remainingBlocks = fork->totalBlocks;
+   u_int32_t remainingBlocks = fork->totalBlocks;
    ol_node *extents = extList != NULL ? extList->head : NULL;
    int isLastExtent;
    int i;
@@ -289,12 +289,12 @@ copyFork(const HFSPlusForkData *const fork, const orderedlist *extList,
 
       if (copyExtent(buf, (HFSPlusExtentDescriptor*)(&fork->extents[i]), dst, 
                isLastExtent, partialBlockSize) == -1) {
-			fprintf(stderr, "%s:%d copyExtent failed\n", __FILE__, __LINE__);
-			free(buf);
-			return -1;
-		}
-		
-		remainingBlocks -= fork->extents[i].blockCount;
+         fprintf(stderr, "%s:%d copyExtent failed\n", __FILE__, __LINE__);
+         free(buf);
+         return -1;
+      }
+      
+      remainingBlocks -= fork->extents[i].blockCount;
    }
    
    while (extents != NULL) {
@@ -307,31 +307,31 @@ copyFork(const HFSPlusForkData *const fork, const orderedlist *extList,
          isLastExtent = i == 7 && extents->next == NULL 
             || rec[i+1]->blockCount == 0 
             || remainingBlocks - rec[i]->blockCount == 0;
-			
-			if (((HFSPlusExtentDescriptor*)(rec[i]))->blockCount > remainingBlocks) {
-				fprintf(stderr, "%s:%d something's wrong here: we expect %d blocks,"
+         
+         if (((HFSPlusExtentDescriptor*)(rec[i]))->blockCount > remainingBlocks) {
+            fprintf(stderr, "%s:%d something's wrong here: we expect %d blocks,"
                   " the extent apparently contains %d blocks\n", 
                   __FILE__, __LINE__, remainingBlocks, 
                   ((HFSPlusExtentDescriptor*)(rec[i]))->blockCount);
-				free(buf);
-				return -1;
-			}
-			
+            free(buf);
+            return -1;
+         }
+         
          if (copyExtent(buf, (HFSPlusExtentDescriptor*)(rec[i]), dst, 
                   isLastExtent, partialBlockSize) == -1) {
-				fprintf(stderr, "%s:%d copyExtent failed\n", __FILE__, __LINE__);
-				free(buf);
-				return -1;
-			}
+            fprintf(stderr, "%s:%d copyExtent failed\n", __FILE__, __LINE__);
+            free(buf);
+            return -1;
+         }
 
-			remainingBlocks -=  rec[i]->blockCount;
+         remainingBlocks -=  rec[i]->blockCount;
       }
 
       extents = extents->next;
    }
    
    free(buf);
-	return 0;
+   return 0;
 }
 
 void 
@@ -348,8 +348,8 @@ setFinderInfo(const char *const fileName, const FndrFileInfo *const info) {
    } else {
       memcpy(&attrBuf.finderInfo[0], &info->fdType, 4);
       memcpy(&attrBuf.finderInfo[4], &info->fdCreator, 4);
-		memcpy(&attrBuf.finderInfo[8], &info->fdFlags, 2);
-		
+      memcpy(&attrBuf.finderInfo[8], &info->fdFlags, 2);
+      
       attrList->commonattr = ATTR_CMN_FNDRINFO;
       
       if (setattrlist(fileName, attrList, attrBuf.finderInfo, 
@@ -358,7 +358,7 @@ setFinderInfo(const char *const fileName, const FndrFileInfo *const info) {
          fprintf(stderr, "couldn't set attributes of: %s\n", fileName);
       }
    }
-	
+   
    free(attrList);
 }
 
@@ -599,15 +599,15 @@ iterateOverExtentsRecords(char *node, BTNodeDescriptor *desc,
       key.fileID = CFSwapInt32BigToHost(*(u_int32_t*)(node+keyOffset+4));
       key.startBlock = CFSwapInt32BigToHost(*(u_int32_t*)(node+keyOffset+8));
       
-		if (key.keyLength != kHFSPlusExtentKeyMaximumLength) {
+      if (key.keyLength != kHFSPlusExtentKeyMaximumLength) {
          fprintf(stderr, "invalid key length in extent overflow record: %d\n", 
                key.keyLength);
       } else {
          u_int16_t recOffset = keyOffset+key.keyLength+2;
          HFSPlusExtentRecord *record = (HFSPlusExtentRecord*)(node+recOffset);
          convertHFSPlusExtentRecordToHostByteOrder(record);
-			(*handler)(&key, record);
-		}
+         (*handler)(&key, record);
+      }
       
       firstOffset -= 2;
    }

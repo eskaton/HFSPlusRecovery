@@ -34,11 +34,11 @@
 
 int 
 imagesFileRecordFilter(HFSPlusCatalogKey *key, sint16 recType) {
-	
-	if (folderRecordFilter(key, recType)) {
-		return 1;
-	}
-	
+   
+   if (folderRecordFilter(key, recType)) {
+      return 1;
+   }
+   
    if (recType == kHFSPlusFileRecord) {
       char *fileName = HFSUniStr255ToCString(&key->nodeName);
       char *pattern = ".JPG";

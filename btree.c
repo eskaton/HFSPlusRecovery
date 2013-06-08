@@ -40,7 +40,7 @@ btree_create_node() {
 
 void 
 btree_destroy_node(btree_node *node) {
-	free(node);
+   free(node);
 }
 
 btree *
@@ -71,15 +71,15 @@ btree_insert_node(btree *tree, btree_node *indexNode, btree_node *valueNode) {
 void 
 btree_insert(btree *tree, void *key, void *value) {
 
-	if (key == NULL) {
-		fprintf(stderr, "btree_insert: key may not be null\n");
-		exit(1);
-	}
-	
-	if (value == NULL) {
-		fprintf(stderr, "btree_insert: value may not be null\n");
-		exit(1);
-	}
+   if (key == NULL) {
+      fprintf(stderr, "btree_insert: key may not be null\n");
+      exit(1);
+   }
+   
+   if (value == NULL) {
+      fprintf(stderr, "btree_insert: value may not be null\n");
+      exit(1);
+   }
 
     btree_node *node = btree_create_node();
     node->key = key;
@@ -95,60 +95,60 @@ btree_insert(btree *tree, void *key, void *value) {
 
 btree_node *
 btree_delete_node(btree *tree, btree_node **node, void *key) {
-	int cmp = tree->keyComparator((*node)->key, key);
-	if (cmp == 0) {
-		btree_node *delNode = *node;
-		if (delNode->rnode != NULL && delNode->lnode != NULL) {
-			tree->nodeCount-=2;
-			*node = delNode->rnode;
-			btree_insert_node(tree, *node, delNode->lnode);
-		} else {
-			tree->nodeCount--;
-			*node = delNode->rnode != NULL 
+   int cmp = tree->keyComparator((*node)->key, key);
+   if (cmp == 0) {
+      btree_node *delNode = *node;
+      if (delNode->rnode != NULL && delNode->lnode != NULL) {
+         tree->nodeCount-=2;
+         *node = delNode->rnode;
+         btree_insert_node(tree, *node, delNode->lnode);
+      } else {
+         tree->nodeCount--;
+         *node = delNode->rnode != NULL 
             ? delNode->rnode 
             : (delNode->lnode != NULL ? delNode->lnode : NULL);
-		}
+      }
 
-		return delNode;
-	} else if (cmp < 0) {
-		return btree_delete_node(tree, &((*node)->rnode), key);
-	} else {
-		return btree_delete_node(tree, &((*node)->lnode), key);
-	}
+      return delNode;
+   } else if (cmp < 0) {
+      return btree_delete_node(tree, &((*node)->rnode), key);
+   } else {
+      return btree_delete_node(tree, &((*node)->lnode), key);
+   }
 }
 
 btree_node *
 btree_delete(btree *tree, void *key) {
     
-	if (tree->root == NULL) {
-		return NULL;
-	}
+   if (tree->root == NULL) {
+      return NULL;
+   }
     
-	return btree_delete_node(tree, &tree->root, key);
+   return btree_delete_node(tree, &tree->root, key);
 }
 
 btree_node *
 btree_find_node(btree *tree, btree_node *node, void *key) {
-	int cmp;
+   int cmp;
     
-	if (node == NULL) {
-		return NULL;
-	}
+   if (node == NULL) {
+      return NULL;
+   }
     
-	cmp = tree->keyComparator(node->key, key);
+   cmp = tree->keyComparator(node->key, key);
     
-	if (cmp < 0) {
-		return btree_find_node(tree, node->rnode, key);
-	} else if( cmp > 0 ) {
-		return btree_find_node(tree, node->lnode, key);
-	} else {
-		return node;
-	}
+   if (cmp < 0) {
+      return btree_find_node(tree, node->rnode, key);
+   } else if( cmp > 0 ) {
+      return btree_find_node(tree, node->lnode, key);
+   } else {
+      return node;
+   }
 }
 
 btree_node *
 btree_find(btree *tree, void *key) {
-	return btree_find_node(tree, tree->root, key);
+   return btree_find_node(tree, tree->root, key);
 }
 
 void 

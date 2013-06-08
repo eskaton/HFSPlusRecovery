@@ -174,7 +174,7 @@ dumpFolderThreadNode(btree_node *node) {
 void 
 linkFolderToParent(btree_node *node) {
    long key = ((folder*)node->value)->parentID;
-	btree_node *parentNode = btree_find(folders, &key);
+   btree_node *parentNode = btree_find(folders, &key);
 
    if (parentNode != NULL) {
       ((folder*)(node->value))->parent = parentNode->value;
@@ -190,7 +190,7 @@ linkFolderToParent(btree_node *node) {
 void 
 linkFilesToParent(btree_node *node) {
    long key = ((file*)node->value)->parentID;
-	btree_node *parentNode = btree_find(folders, &key);
+   btree_node *parentNode = btree_find(folders, &key);
 
    if (parentNode != NULL) {
       ((file*)(node->value))->parent = parentNode->value;
@@ -204,9 +204,9 @@ linkFilesToParent(btree_node *node) {
 void 
 linkExtentsToFile(btree_node *node) {
    extentKey *key = (extentKey*)node->key;
-	orderedlist *value = (orderedlist*)node->value;
+   orderedlist *value = (orderedlist*)node->value;
    btree_node *fileNode = btree_find(files, &key->fileID);
-	file* f;
+   file* f;
    
    if (fileNode == NULL) {
       fprintf(stderr, "file %d has extents but no catalog entry\n", 
@@ -214,13 +214,13 @@ linkExtentsToFile(btree_node *node) {
       return;
    }
    
-	f = (file*)fileNode->value;
-	
+   f = (file*)fileNode->value;
+   
    if (key->forkType == 0x00) {
-		f->dataExtents = value;
-	} else {
-		f->rsrcExtents = value;
-	}
+      f->dataExtents = value;
+   } else {
+      f->rsrcExtents = value;
+   }
 }
 
 void 
@@ -259,7 +259,7 @@ buildPath(btree_node *node) {
       pathLen += top + 1;
       pathName = (char*)malloc(pathLen);
       pathName[0] = '/';
-		pathName[pathLen-1] = '\0';
+      pathName[pathLen-1] = '\0';
       strrjoin(folderStack, top-1, '/', pathName+1);
       free(folderStack);
       
@@ -270,16 +270,16 @@ buildPath(btree_node *node) {
 void 
 listFilesWithExtends(btree_node *node) {
    file *f = (file*)node->value;
-	HFSPlusCatalogFile *hfsFile = (HFSPlusCatalogFile*)f->hfsFile;
-	int dataBlocks = 0, rsrcBlocks = 0, e;
+   HFSPlusCatalogFile *hfsFile = (HFSPlusCatalogFile*)f->hfsFile;
+   int dataBlocks = 0, rsrcBlocks = 0, e;
    
    for (e = 0; e < 8; e++) {
       dataBlocks += hfsFile->dataFork.extents[e].blockCount;
       rsrcBlocks += hfsFile->resourceFork.extents[e].blockCount;
 
-		if (dataBlocks == hfsFile->dataFork.totalBlocks && rsrcBlocks == hfsFile->resourceFork.totalBlocks) {
-			break;
-		}
+      if (dataBlocks == hfsFile->dataFork.totalBlocks && rsrcBlocks == hfsFile->resourceFork.totalBlocks) {
+         break;
+      }
    }
    
    if (dataBlocks != hfsFile->dataFork.totalBlocks && f->dataExtents == NULL 
@@ -288,55 +288,55 @@ listFilesWithExtends(btree_node *node) {
       fprintf(stderr, "inconsistency in file extents: %s\n", f->path);
       return;
    }
-	
-	if (dataBlocks == hfsFile->dataFork.totalBlocks 
+   
+   if (dataBlocks == hfsFile->dataFork.totalBlocks 
          && rsrcBlocks == hfsFile->resourceFork.totalBlocks) {
-		/* ignore files without extents */
+      /* ignore files without extents */
       return;
    }
-	
-	printf("%s\n", f->name);
+   
+   printf("%s\n", f->name);
 }
 
 char *
 concatPath(const char *const p1, const char *const p2) {
-	int len1 = strlen(p1);
-	int len2 = strlen(p2);
-	char *path = (char*)malloc(len1+len2+2);
-	memcpy(path, p1, len1);
-	path[len1] = '/';
-	memcpy(path+len1+1, p2, len2);
-	path[len1+len2+1] = '\0';
-	return path;
+   int len1 = strlen(p1);
+   int len2 = strlen(p2);
+   char *path = (char*)malloc(len1+len2+2);
+   memcpy(path, p1, len1);
+   path[len1] = '/';
+   memcpy(path+len1+1, p2, len2);
+   path[len1+len2+1] = '\0';
+   return path;
 }
 
 char *
 concat(const char *const s1, const char *const s2) {
-	int len1 = strlen(s1);
-	int len2 = strlen(s2);
-	char *str = (char*)malloc(len1+len2+1);
-	memcpy(str, s1, len1);
-	memcpy(str+len1, s2, len2);
-	str[len1+len2] = '\0';
-	return str;
+   int len1 = strlen(s1);
+   int len2 = strlen(s2);
+   char *str = (char*)malloc(len1+len2+1);
+   memcpy(str, s1, len1);
+   memcpy(str+len1, s2, len2);
+   str[len1+len2] = '\0';
+   return str;
 }
 
 int 
 restoreFile(file *f, char *path) {
-	char *dstFile;
+   char *dstFile;
    /*TODO: apply the original mask*/
    mode_t mask = S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
 
-	if (mkdirr(path, mask) != 0 && errno != EEXIST) {
-		fprintf(stderr, "couldn't create path (errno=%d): %s\n", errno, path);
-		return -1;
-	} else {
-		dstFile = concatPath(path, f->name);
-		copyFile(f, dstFile);
-		free(dstFile);
-	}
-	
-	return 0;
+   if (mkdirr(path, mask) != 0 && errno != EEXIST) {
+      fprintf(stderr, "couldn't create path (errno=%d): %s\n", errno, path);
+      return -1;
+   } else {
+      dstFile = concatPath(path, f->name);
+      copyFile(f, dstFile);
+      free(dstFile);
+   }
+   
+   return 0;
 }
 
 void 
@@ -346,26 +346,26 @@ restore(btree_node *node) {
    int error = 0;
 
    if (f->path != NULL) {
-		path = concat(recoveryPath, f->path);
-		
+      path = concat(recoveryPath, f->path);
+      
       if (restoreFile(f, path) == -1) {
          error = 1;
       }
-		
-		free(path);
+      
+      free(path);
    }
    
    if (f->path == NULL || error) {
-		cnidStr = (char*)malloc(maxCnidLen+1);
+      cnidStr = (char*)malloc(maxCnidLen+1);
       sprintf(cnidStr, "%d", f->parentID);
-		tmpPath = concat(recoveryPath, lostPath);
-		path = concatPath(tmpPath, cnidStr);
-		free(tmpPath);
-		free(cnidStr);
-	
-		if (restoreFile(f, path) == -1) {
-			fprintf(stderr, "unable to restore file: %s\n", f->name);
-		}
+      tmpPath = concat(recoveryPath, lostPath);
+      path = concatPath(tmpPath, cnidStr);
+      free(tmpPath);
+      free(cnidStr);
+   
+      if (restoreFile(f, path) == -1) {
+         fprintf(stderr, "unable to restore file: %s\n", f->name);
+      }
       
       free(path);
    }
@@ -389,7 +389,7 @@ recovery() {
    printf("linking overflow extents to files\n");
    btree_inorderTraverse(extents, &linkExtentsToFile);
    printf("restoring files...\n");
-	btree_inorderTraverse(files, &restore);
+   btree_inorderTraverse(files, &restore);
    printf("finished\n");
 
 }
