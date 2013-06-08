@@ -134,7 +134,6 @@ ol_find(orderedlist *list, void *key) {
    return ol_find_node(list, list->head, key);
 }
 
-
 void 
 ol_traverse_node(ol_node *node, void(*nodeHandler)(ol_node *node)) {
     if (node == NULL) {

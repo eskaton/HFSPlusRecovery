@@ -127,7 +127,8 @@ dumpExtentRecord(HFSPlusExtentKey *key, HFSPlusExtentRecord *record) {
    }
 }
 
-void addExtentRecord(HFSPlusExtentKey *key, HFSPlusExtentRecord *record) {
+void 
+addExtentRecord(HFSPlusExtentKey *key, HFSPlusExtentRecord *record) {
    u_int32_t *listKey = (u_int32_t*)malloc(sizeof(u_int32_t));
    extentKey *treeKey = (extentKey*)malloc(sizeof(extentKey));
    HFSPlusExtentRecord *r = 

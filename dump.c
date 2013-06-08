@@ -105,7 +105,8 @@ dumpNodeDescriptor(const BTNodeDescriptor const* desc) {
 }
 
 
-void dumpHeaderRecord(const BTHeaderRec const* hdr) {
+void 
+dumpHeaderRecord(const BTHeaderRec const* hdr) {
    printf("BTHeaderRec\n");
    printf(" tree depth:      %d\n", hdr->treeDepth);
    printf(" root node:      %d\n", hdr->rootNode);

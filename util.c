@@ -134,7 +134,8 @@ char
             top++;
 
             if (top == currentSize) {
-                if ((stack = (char**)realloc(stack, (currentSize *= growthFactor)*sizeof(char*))) == NULL) {
+                if ((stack = (char**)realloc(stack, (currentSize *= growthFactor) * 
+                            sizeof(char*))) == NULL) {
                     perror("realloc");
                     exit(1);
                 }
